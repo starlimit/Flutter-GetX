@@ -6,6 +6,7 @@ import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
 import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
 import 'package:bottom_nav_test/app/modules/settings_module/settings_page.dart';
+import 'package:bottom_nav_test/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +16,18 @@ class HomeController extends GetxController {
   var currentIndex = 0.obs;
   final currentPage = ''.obs;
 
-  final pages = <String>['/browse', '/history', '/settings', '/product_list'];
-  final pageTitles = <String>['Browse', 'History', 'Settings', 'Product List'];
+  final pages = <String>[
+    Routes.PRODUCT_LIST,
+    Routes.BROWSE,
+    Routes.HISTORY,
+    Routes.SETTINGS
+  ];
+  final pageTitles = <String>[
+    RouteTitles.PRODUCT_LIST,
+    RouteTitles.BROWSE,
+    RouteTitles.HISTORY,
+    RouteTitles.SETTINGS
+  ];
 
   void changePage(int index) {
     currentIndex.value = index;
@@ -27,28 +38,28 @@ class HomeController extends GetxController {
   }
 
   Route onGenerateRoute(RouteSettings settings) {
-    if (settings.name == '/browse')
+    if (settings.name == Routes.BROWSE)
       return GetPageRoute(
         settings: settings,
         page: () => BrowsePage(),
         binding: BrowseBinding(),
       );
 
-    if (settings.name == '/history')
+    if (settings.name == Routes.HISTORY)
       return GetPageRoute(
         settings: settings,
         page: () => HistoryPage(),
         binding: HistoryBinding(),
       );
 
-    if (settings.name == '/settings')
+    if (settings.name == Routes.SETTINGS)
       return GetPageRoute(
         settings: settings,
         page: () => SettingsPage(),
         binding: SettingsBinding(),
       );
 
-    if (settings.name == '/product_list')
+    if (settings.name == Routes.PRODUCT_LIST)
       return GetPageRoute(
         settings: settings,
         page: () => ProductPage(),

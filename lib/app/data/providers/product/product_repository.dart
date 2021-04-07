@@ -7,7 +7,6 @@ class ProductRepository {
   ProductRepository({@required this.apiClient}) : assert(apiClient != null);
 
   getProductList() {
-    print('in Repository getProductList');
     return apiClient.getProductList();
   }
 // getId(id){

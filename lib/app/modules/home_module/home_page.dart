@@ -19,6 +19,10 @@ class HomePage extends GetView<HomeController> {
             onItemSelected: controller.changePage,
             items: [
               BottomNavyBarItem(
+                  icon: Icon(Icons.shopping_bag),
+                  title: Text('Products'),
+                  activeColor: Colors.green),
+              BottomNavyBarItem(
                 icon: Icon(Icons.search),
                 title: Text('Browse'),
                 activeColor: Colors.red,
@@ -31,10 +35,6 @@ class HomePage extends GetView<HomeController> {
                   icon: Icon(Icons.settings),
                   title: Text('Settings'),
                   activeColor: Colors.blue),
-              BottomNavyBarItem(
-                  icon: Icon(Icons.shopping_bag),
-                  title: Text('Products'),
-                  activeColor: Colors.green),
             ],
           )),
       // bottomNavigationBar: Obx(

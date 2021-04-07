@@ -17,7 +17,6 @@ class ProductController extends GetxController {
     // ignore: todo
     // TODO: implement onInit
     super.onInit();
-    //fetchProductList();
   }
 
   fetchProductList() {
