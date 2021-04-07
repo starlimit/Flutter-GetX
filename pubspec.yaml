@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  badges: ^1.2.0
   bottom_navy_bar: ^6.0.0
   cupertino_icons: ^1.0.2
   get: ^4.1.3

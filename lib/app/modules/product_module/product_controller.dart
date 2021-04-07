@@ -11,7 +11,7 @@ class ProductController extends GetxController {
 
   set productList(value) => this._productList.value = value;
   get productList => this._productList;
-
+  static ProductController get to => Get.find();
   @override
   void onInit() {
     // ignore: todo
@@ -22,5 +22,16 @@ class ProductController extends GetxController {
   fetchProductList() {
     print('in controller fetching products');
     repository.getProductList().then((res) => {this.productList = res});
+  }
+
+  editProduct(index, item) {
+    print('edit Product=>$index $item.tojson()');
+    return;
+  }
+
+  removeProduct(index) {
+    _productList.removeAt(index);
+    print('remove Product=> ${productList.length}');
+    return;
   }
 }
