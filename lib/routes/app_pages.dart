@@ -1,9 +1,11 @@
+import 'package:bottom_nav_test/app/data/bindings/authentication/auth_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/browse/browse_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/home/home_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
 import 'package:bottom_nav_test/app/modules/another_module/another_page.dart';
+import 'package:bottom_nav_test/app/modules/authentication_module/login_page.dart';
 import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
@@ -14,6 +16,11 @@ part './app_routes.dart';
 
 abstract class AppPages {
   static final pages = [
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: AuthBinding(),
+    ),
     GetPage(
       name: Routes.HOME,
       page: () => HomePage(),
