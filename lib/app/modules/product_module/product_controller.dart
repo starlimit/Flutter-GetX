@@ -34,4 +34,8 @@ class ProductController extends GetxController {
     print('remove Product=> ${productList.length}');
     return;
   }
+
+  addItem(item, [int index = -1]) {
+    item == -1 ? _productList.add(item) : _productList.insert(index, item);
+  }
 }

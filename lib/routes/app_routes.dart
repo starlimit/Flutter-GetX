@@ -1,7 +1,7 @@
 part of './app_pages.dart';
 
 abstract class Routes {
-  //static const INITIAL = '/';
+  static const NOT_FOUND = '/not_found';
   static const HOME = '/home';
   static const BROWSE = '/browse';
   static const HISTORY = '/history';
@@ -11,7 +11,7 @@ abstract class Routes {
 }
 
 abstract class RouteTitles {
-  //static const INITIAL = '/';
+  static const NOT_FOUND = 'Page not Found!';
   static const HOME = 'Home';
   static const BROWSE = 'Browse';
   static const HISTORY = 'History';

@@ -9,7 +9,6 @@ class ProductPage extends GetView<ProductController> {
       // appBar: AppBar(title: Text('ProductPage')),
       body: SafeArea(
           child: GetX<ProductController>(
-
               //autoRemove: false,
               //assignId: false,
               initState: (state) {
@@ -17,39 +16,50 @@ class ProductPage extends GetView<ProductController> {
       }, builder: (_) {
         return _.productList.isEmpty
             ? Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: _.productList.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    onDismissed: (direction) {
-                      // direction == DismissDirection.endToStart
-                      //     ?
-                      _.removeProduct(index);
-                      //    : _.editProduct(index, _.productList[index]);
-                    },
-                    direction: DismissDirection.endToStart,
-                    background: Container(
-                      color: Colors.green,
-                      child: Align(
-                        alignment: Alignment(-0.9, 0),
-                        child: Icon(Icons.edit, color: Colors.white),
-                      ),
-                    ),
-                    secondaryBackground: Container(
-                      color: Colors.red,
-                      child: Align(
-                        alignment: Alignment(0.9, 0),
-                        child: Icon(Icons.delete, color: Colors.white),
-                      ),
-                    ),
-                    key: UniqueKey(),
-                    child: ListTile(
-                      onTap: () {},
-                      title: Text(_.productList[index].title),
-                      subtitle: Text(index.toString()),
-                    ),
-                  );
-                });
+            : Obx(
+                () => ListView.builder(
+                    itemCount: _.productList.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          final item = _.productList[index];
+                          // direction == DismissDirection.endToStart
+                          //     ?
+                          //_.removeProduct(index);
+                          //    : _.editProduct(index, _.productList[index]);
+                          Get.defaultDialog(
+                              title: 'Confirm',
+                              onCancel: () => {},
+                              onConfirm: () {
+                                _.removeProduct(index);
+                                Get.back();
+                              },
+                              middleText: "Confirm Delete of Product?");
+                        },
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Colors.green,
+                          child: Align(
+                            alignment: Alignment(-0.9, 0),
+                            child: Icon(Icons.edit, color: Colors.white),
+                          ),
+                        ),
+                        secondaryBackground: Container(
+                          color: Colors.red,
+                          child: Align(
+                            alignment: Alignment(0.9, 0),
+                            child: Icon(Icons.delete, color: Colors.white),
+                          ),
+                        ),
+                        key: UniqueKey(),
+                        child: ListTile(
+                          onTap: () {},
+                          title: Text(_.productList[index].title),
+                          subtitle: Text(index.toString()),
+                        ),
+                      );
+                    }),
+              );
       })
           //  GetX<ProductController>(
           //     //autoRemove: false,
