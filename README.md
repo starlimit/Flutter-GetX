@@ -1,6 +1,6 @@
-# bottom_nav_test
+# Flutter Getx-Sample Projects
 
-A new Flutter project.
+Check on the Branches to view.
 
 ## Getting Started
 
