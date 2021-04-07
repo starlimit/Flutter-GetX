@@ -1,7 +1,7 @@
-import 'package:bottom_nav_test/app/modules/home_module/home_controller.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'home.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
@@ -31,6 +31,10 @@ class HomePage extends GetView<HomeController> {
                   icon: Icon(Icons.settings),
                   title: Text('Settings'),
                   activeColor: Colors.blue),
+              BottomNavyBarItem(
+                  icon: Icon(Icons.shopping_bag),
+                  title: Text('Products'),
+                  activeColor: Colors.green),
             ],
           )),
       // bottomNavigationBar: Obx(

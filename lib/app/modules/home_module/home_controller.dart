@@ -1,9 +1,10 @@
 import 'package:bottom_nav_test/app/data/bindings/browse/browse_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
-import 'package:bottom_nav_test/app/data/bindings/home/home_binding.dart';
+import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
+import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
 import 'package:bottom_nav_test/app/modules/settings_module/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,8 @@ class HomeController extends GetxController {
   var currentIndex = 0.obs;
   final currentPage = ''.obs;
 
-  final pages = <String>['/browse', '/history', '/settings'];
-  final pageTitles = <String>['Browse', 'History', 'Settings'];
+  final pages = <String>['/browse', '/history', '/settings', '/product_list'];
+  final pageTitles = <String>['Browse', 'History', 'Settings', 'Product List'];
 
   void changePage(int index) {
     currentIndex.value = index;
@@ -47,6 +48,12 @@ class HomeController extends GetxController {
         binding: SettingsBinding(),
       );
 
+    if (settings.name == '/product_list')
+      return GetPageRoute(
+        settings: settings,
+        page: () => ProductPage(),
+        binding: ProductBinding(),
+      );
     return null;
   }
 }

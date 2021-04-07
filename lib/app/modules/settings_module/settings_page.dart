@@ -14,7 +14,7 @@ class SettingsPage extends StatelessWidget {
             Container(
               child: Text(Get.find<SettingsController>().title.value),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Another Page'),
               onPressed: () => Get.toNamed('/another'),
             ),

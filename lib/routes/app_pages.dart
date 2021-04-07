@@ -1,7 +1,9 @@
 import 'package:bottom_nav_test/app/data/bindings/browse/browse_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/home/home_binding.dart';
+import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
+import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
 import 'package:bottom_nav_test/pages/another_page.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
@@ -31,6 +33,11 @@ abstract class AppPages {
       name: Routes.HISTORY,
       page: () => HistoryPage(),
       binding: HistoryBinding(),
+    ),
+    GetPage(
+      name: Routes.PRODUCT_LIST,
+      page: () => ProductPage(),
+      binding: ProductBinding(),
     ),
     GetPage(
       name: Routes.ANOTHER,
