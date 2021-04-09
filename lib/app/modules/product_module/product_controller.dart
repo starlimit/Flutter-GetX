@@ -20,7 +20,6 @@ class ProductController extends GetxController {
   }
 
   fetchProductList() {
-    print('in controller fetching products');
     repository.getProductList().then((res) => {this.productList = res});
   }
 

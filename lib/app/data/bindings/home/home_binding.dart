@@ -1,3 +1,4 @@
+import 'package:bottom_nav_test/app/data/helpers/helpers.dart';
 import 'package:bottom_nav_test/app/data/providers/auth/auth.dart';
 import 'package:bottom_nav_test/app/data/providers/auth/auth_repository.dart';
 import 'package:bottom_nav_test/app/data/providers/product/product.dart';
@@ -20,7 +21,7 @@ class HomeBinding extends Bindings {
       () => AuthController(
         repository: AuthRepository(
           apiClient: AuthApiClient(
-            api: http.Client(),
+            helper: ApiBaseHelper(),
           ),
         ),
       ),

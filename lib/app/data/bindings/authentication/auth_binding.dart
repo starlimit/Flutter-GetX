@@ -1,3 +1,4 @@
+import 'package:bottom_nav_test/app/data/helpers/helpers.dart';
 import 'package:bottom_nav_test/app/data/providers/auth/auth_provider.dart';
 import 'package:bottom_nav_test/app/data/providers/auth/auth_repository.dart';
 import 'package:bottom_nav_test/app/modules/authentication_module/auth_controller.dart';
@@ -11,7 +12,8 @@ class AuthBinding implements Bindings {
       () => AuthController(
         repository: AuthRepository(
           apiClient: AuthApiClient(
-            api: http.Client(),
+            // api: http.Client(),
+            helper: ApiBaseHelper(),
           ),
         ),
       ),

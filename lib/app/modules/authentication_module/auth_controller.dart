@@ -18,9 +18,8 @@ class AuthController extends GetxController {
     //  try {
     repository.verifyUser(login).then((res) {
       // TO: Save User Details in Storage
-      if (res.token != '') {
+      if (res != null && res.token != '') {
         print('${res.token}');
-
         Get.offNamed(Routes.HOME);
       }
     });

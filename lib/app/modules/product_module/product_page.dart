@@ -22,7 +22,7 @@ class ProductPage extends GetView<ProductController> {
                     itemBuilder: (context, index) {
                       return Dismissible(
                         onDismissed: (direction) {
-                          final item = _.productList[index];
+                          //final item = _.productList[index];
                           // direction == DismissDirection.endToStart
                           //     ?
                           //_.removeProduct(index);
