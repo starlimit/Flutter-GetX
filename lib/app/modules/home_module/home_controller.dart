@@ -2,6 +2,7 @@ import 'package:bottom_nav_test/app/data/bindings/browse/browse_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
+import 'package:bottom_nav_test/app/data/models/login_model.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
 import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
@@ -9,6 +10,7 @@ import 'package:bottom_nav_test/app/modules/settings_module/settings_page.dart';
 import 'package:bottom_nav_test/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
@@ -16,6 +18,16 @@ class HomeController extends GetxController {
   var currentIndex = 0.obs;
   final currentPage = ''.obs;
 
+  final _storage = GetStorage();
+
+  final _userInfo = LoginModel().obs;
+  get userInfo => this._userInfo.value;
+  set userInfo(value) => this._userInfo.value = value;
+
+  HomeController() {
+    userInfo = LoginModel.fromJson(_storage.read('s_userInfo'));
+    print('==>${this.userInfo.token.toString()}');
+  }
   final pages = <String>[
     Routes.PRODUCT_LIST,
     Routes.BROWSE,

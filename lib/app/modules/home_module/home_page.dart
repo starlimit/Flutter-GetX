@@ -16,6 +16,7 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         title: Obx(() => Text(controller.currentPage.value)),
         actions: [
+          Obx(() => Text(controller.userInfo.email)),
           Obx(() => _shoppingCartBadge(productController.productList.length)),
           IconButton(
               icon: Icon(Icons.settings_power, color: Colors.red),

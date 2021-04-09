@@ -6,7 +6,7 @@ class LoginModel {
   LoginModel({this.email, this.password});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
-    // this.email = json['email'];
+    this.email = json['email'];
     // this.password = json['password'];
     this.token = json['token'];
   }
