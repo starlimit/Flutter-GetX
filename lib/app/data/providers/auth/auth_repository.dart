@@ -10,4 +10,8 @@ class AuthRepository {
   verifyUser(LoginModel login) {
     return apiClient.verifyUser(login);
   }
+
+  fetchUser(String id) {
+    return apiClient.fetchUser(id);
+  }
 }

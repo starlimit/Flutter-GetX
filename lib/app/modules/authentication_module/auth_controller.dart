@@ -21,28 +21,36 @@ class AuthController extends GetxController {
 
   LoginState get state => _loginStateStream.value;
 
-  verifyUser() {
+  verifyUser() async {
     //  try {
     _loginStateStream.value = LoginLoading();
 
-    repository.verifyUser(login).then((res) {
-      // TO: Save User Details in Storage
-      _loginStateStream.value = LoginState();
-      if (res != null && res.token != '') {
-        login.password = '';
-        login.token = res.token;
-        //Write to Storage
-        userInfo.write('s_userInfo', login.toJson());
-        // var x = userInfo.read('s_userInfo');
-        // print('${res.token}.....${x.toString()}');
-        Get.offNamed(Routes.HOME);
-      }
-    }).catchError((err) {});
+    var res = await repository.verifyUser(login);
+
+    // TO: Save User Details in Storage
+    _loginStateStream.value = LoginState();
+    if (res != null && res.token != '') {
+      login.password = '';
+      login.token = res.token;
+      //Write to Storage
+      userInfo.write('s_authInfo', login.toJson());
+
+      //Fetch User Info
+      var user = await repository.fetchUser("1");
+
+      //Write to Storage
+      userInfo.write('s_userInfo', user.toJson());
+
+      Get.offNamed(Routes.HOME);
+    }
+    //}
+    //)
+    //.catchError((err) {});
     //  }
   }
 
   signOut() {
     userInfo.remove('s_userInfo');
-    Get.offNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }
