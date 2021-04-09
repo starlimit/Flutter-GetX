@@ -5,24 +5,15 @@ import 'package:get/get.dart';
 //import 'app/modules/shared/not_found_page.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    //  unknownRoute: GetPage(name: '/not_found', page: () => UnknownRoutePage()),
-    initialRoute: Routes.LOGIN, // '/home',
-    defaultTransition: Transition.fade,
-    getPages: AppPages.pages,
-    // getPages: [
-    //   GetPage(
-    //     name: '/home',
-    //     page: () => HomePage(),
-    //     binding: HomeBinding(),
-    //   ),
-    //   GetPage(
-    //     name: '/another',
-    //     page: () => AnotherPage(),
-    //   ),
-    // ],
-  ));
+  runApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      //  unknownRoute: GetPage(name: '/not_found', page: () => UnknownRoutePage()),
+      initialRoute: Routes.LOGIN, // '/home',
+      defaultTransition: Transition.fade,
+      getPages: AppPages.pages,
+    ),
+  );
 }
 
 //Credits : https://github.com/jonataslaw/getx/issues/799#issuecomment-730719165

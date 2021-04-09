@@ -5,6 +5,7 @@ import 'package:bottom_nav_test/config/config.dart';
 import 'package:http/http.dart' as http;
 
 class ApiBaseHelper {
+// Get Request
   Future<dynamic> get(String url) async {
     print('Api Get, url $url');
     var responseJson;
@@ -19,6 +20,7 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+// POST Request
   Future<dynamic> post(String url, Object body) async {
     print('Api Post, url $url');
     var responseJson;
@@ -34,6 +36,7 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+// Response Handling
   dynamic _returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
