@@ -16,20 +16,13 @@ class AuthController extends GetxController {
 
   verifyUser() {
     //  try {
-    print('$login.email $login.password}');
-    repository.verifyUser(login).then((user) {
+    repository.verifyUser(login).then((res) {
       // TO: Save User Details in Storage
-      if (user != null) {
-        print('${user.firstName}');
+      if (res.token != '') {
+        print('${res.token}');
+
         Get.offNamed(Routes.HOME);
-      } //else
-      //Get.back();
-      // else {
-      //   Get.snackbar('Error ', 'Invalid Credentials',
-      //       colorText: Colors.white,
-      //       backgroundColor: Colors.red,
-      //       snackPosition: SnackPosition.BOTTOM);
-      // }
+      }
     });
     //  }
   }
@@ -37,20 +30,4 @@ class AuthController extends GetxController {
   signOut() {
     Get.offNamed(Routes.LOGIN);
   }
-  //   void signOut() async {
-  //   await _authenticationService.signOut();
-  //   _authenticationStateStream.value = UnAuthenticated();
-  // }
-
-  // void _getAuthenticatedUser() async {
-  //   _authenticationStateStream.value = AuthenticationLoading();
-
-  //   final user = await _authenticationService.getCurrentUser();
-
-  //   if (user == null) {
-  //     _authenticationStateStream.value = UnAuthenticated();
-  //   } else {
-  //     _authenticationStateStream.value = Authenticated(user: user);
-  //   }
-  // }
 }

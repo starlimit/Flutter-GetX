@@ -79,7 +79,7 @@ class LoginForm extends GetView {
       child: Column(
         children: <Widget>[
           TextFormField(
-            initialValue: 'Test@yahoo.com',
+            initialValue: 'eve.holt@reqres.in',
             keyboardType: TextInputType.emailAddress,
             onSaved: (value) => _.login.email = value,
             decoration: InputDecoration(labelText: 'Email'),
@@ -94,7 +94,7 @@ class LoginForm extends GetView {
             },
           ),
           TextFormField(
-              initialValue: 'Testing',
+              initialValue: 'cityslicka',
               keyboardType: TextInputType.text,
               onSaved: (value) => _.login.password = value,
               decoration: InputDecoration(labelText: 'Password'),
@@ -123,9 +123,9 @@ class LoginForm extends GetView {
   }
 
   void submitForm(FormState form) {
-    Get.dialog(Center(
-      child: CircularProgressIndicator(),
-    ));
+    // Get.dialog(Center(
+    //   child: CircularProgressIndicator(),
+    // ));
     form.save();
     _.verifyUser();
   }
