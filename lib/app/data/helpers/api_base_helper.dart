@@ -4,6 +4,7 @@ import 'package:bottom_nav_test/app/data/exceptions/exceptions.dart';
 import 'package:bottom_nav_test/config/config.dart';
 import 'package:http/http.dart' as http;
 
+//Credit : https://medium.com/solidmvp-africa/making-your-api-calls-in-flutter-the-right-way-f0a03e35b4b1
 class ApiBaseHelper {
   Future<dynamic> get(String url) async {
     print('Api Get, url $url');
