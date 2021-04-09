@@ -1,61 +1,10 @@
+import 'package:bottom_nav_test/app/data/helpers/api_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//Credits https://github.com/vince-nyanga/flutter_getx_authentication
 import 'auth_controller.dart';
 
-// class LoginPage extends GetView<AuthController> {
-//   final _ = AuthController.to;
-//   @override
-//   Widget build(BuildContext context) {
-//     final GlobalKey key = GlobalKey<FormState>();
-//     return Form(
-//       key: key,
-//       child: Column(
-//         children: <Widget>[
-//           TextFormField(
-//             keyboardType: TextInputType.emailAddress,
-//             onSaved: (value) => _.login.email = value,
-//             decoration: InputDecoration(labelText: 'Email'),
-//             enableSuggestions: true,
-//             maxLength: 32,
-//             style: TextStyle(fontSize: 20),
-//             validator: (value) {
-//               if (!isEmail(value)) {
-//                 return 'Insira um email válido';
-//               } else
-//                 return null;
-//             },
-//           ),
-//           TextFormField(
-//               keyboardType: TextInputType.text,
-//               onSaved: (value) => _.login.password = value,
-//               decoration: InputDecoration(labelText: 'Senha'),
-//               enableSuggestions: true,
-//               obscureText: true,
-//               maxLength: 20,
-//               style: TextStyle(fontSize: 20),
-//               validator: (value) {
-//                 if (value.isEmpty) {
-//                   return 'Insira uma senha';
-//                 } else if (value.length < 5) {
-//                   return 'Insira uma senha maior';
-//                 } else
-//                   return null;
-//               }),
-//           ElevatedButton(
-//             onPressed: () {
-//               final FormState form = key.currentState;
-//               form.validate() ? form.save() : print('erro ao logar');
-//               print(_.login.email);
-//               print(_.login.password);
-//               _.login();
-//             },
-//             child: Text('OK'),
-//           )
-//         ],
-//       ),
-//     );
-//   }
+//Credits https://github.com/vince-nyanga/flutter_getx_authentication
+//
 
 class LoginPage extends GetView<AuthController> {
   @override
@@ -76,49 +25,64 @@ class LoginForm extends GetView {
     final GlobalKey key = GlobalKey<FormState>();
     return Form(
       key: key,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            initialValue: 'eve.holt@reqres.in',
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (value) => _.login.email = value,
-            decoration: InputDecoration(labelText: 'Email'),
-            enableSuggestions: true,
-            maxLength: 32,
-            style: TextStyle(fontSize: 20),
-            validator: (value) {
-              if (!isEmail(value)) {
-                return 'Invalid Email!';
-              } else
-                return null;
-            },
-          ),
-          TextFormField(
-              initialValue: 'cityslicka',
-              keyboardType: TextInputType.text,
-              onSaved: (value) => _.login.password = value,
-              decoration: InputDecoration(labelText: 'Password'),
-              enableSuggestions: true,
-              obscureText: true,
-              maxLength: 20,
-              style: TextStyle(fontSize: 20),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Password cannot be empty';
-                } else if (value.length < 5) {
-                  return 'Password minimum length is 5';
-                } else
-                  return null;
-              }),
-          ElevatedButton(
-            onPressed: () async {
-              final FormState form = key.currentState;
-              form.validate() ? submitForm(form) : formError();
-            },
-            child: Text('OK'),
-          )
-        ],
-      ),
+      child: Obx(() => Column(
+            children: <Widget>[
+              TextFormField(
+                initialValue: 'eve.holt@reqres.in',
+                keyboardType: TextInputType.emailAddress,
+                onSaved: (value) => _.login.email = value,
+                decoration: InputDecoration(labelText: 'Email'),
+                enableSuggestions: true,
+                maxLength: 32,
+                style: TextStyle(fontSize: 20),
+                validator: (value) {
+                  if (!isEmail(value)) {
+                    return 'Invalid Email!';
+                  } else
+                    return null;
+                },
+              ),
+              TextFormField(
+                  initialValue: 'cityslicka',
+                  keyboardType: TextInputType.text,
+                  onSaved: (value) => _.login.password = value,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  enableSuggestions: true,
+                  obscureText: true,
+                  maxLength: 20,
+                  style: TextStyle(fontSize: 20),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Password cannot be empty';
+                    } else if (value.length < 5) {
+                      return 'Password minimum length is 5';
+                    } else
+                      return null;
+                  }),
+              ElevatedButton(
+                onPressed: _.state is LoginLoading
+                    ? null
+                    : () async {
+                        final FormState form = key.currentState;
+                        form.validate() ? submitForm(form) : formError();
+                      },
+                child: Text('OK'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              if (_.state is LoginFailure)
+                Text(
+                  (_.state as LoginFailure).error,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Get.theme.errorColor),
+                ),
+              if (_.state is LoginLoading)
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          )),
     );
   }
 
@@ -126,6 +90,7 @@ class LoginForm extends GetView {
     // Get.dialog(Center(
     //   child: CircularProgressIndicator(),
     // ));
+
     form.save();
     _.verifyUser();
   }

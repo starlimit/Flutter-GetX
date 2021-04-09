@@ -1,3 +1,7 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+// Useful for Bloc Pattern
 class ApiResponse<T> {
   Status status;
   T data;
@@ -13,3 +17,19 @@ class ApiResponse<T> {
 }
 
 enum Status { LOADING, COMPLETED, ERROR }
+
+class LoginState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginLoading extends LoginState {}
+
+class LoginFailure extends LoginState {
+  final String error;
+
+  LoginFailure({@required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
