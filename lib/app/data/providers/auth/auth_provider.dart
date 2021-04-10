@@ -43,7 +43,8 @@ class AuthApiClient extends GetConnect {
     try {
       final response = await helper.get(Config.USER_GET + '/$id');
       print(response['data']);
-      return UserModel.fromJson(response['data']);
+      var x = response['data'];
+      return UserModel.fromJson(x);
     } catch (err) {
       Get.snackbar('Error', '${err.toString()}!',
           icon: Icon(Icons.error_rounded),

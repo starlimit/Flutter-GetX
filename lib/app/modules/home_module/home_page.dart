@@ -13,10 +13,11 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Obx(() => mainDrawer()),
       appBar: AppBar(
         title: Obx(() => Text(controller.currentPage.value)),
         actions: [
-          Obx(() => Text(controller.userInfo.email)),
+          // Obx(() => Text(controller.userInfo.avatar)),
           Obx(() => _shoppingCartBadge(productController.productList.length)),
           IconButton(
               icon: Icon(Icons.settings_power, color: Colors.red),
@@ -75,6 +76,63 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
+  Widget mainDrawer() {
+    final _currentIndex = controller.currentIndex.value;
+    //final _currentPage = controller.currentPage.value;
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: createDrawerHeader(),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.check_circle),
+            title: Text(RouteTitles.PRODUCT_LIST),
+            // tileColor: Get.currentRoute == Routes.PRODUCT_LIST
+            tileColor:
+                _currentIndex == controller.pages.indexOf(Routes.PRODUCT_LIST)
+                    ? Colors.grey[300]
+                    : null,
+            onTap: () {
+              print(controller.currentIndex.value);
+              Get.back();
+              controller
+                  .changePage(controller.pages.indexOf(Routes.PRODUCT_LIST));
+              //Get.offAllNamed(Routes.PRODUCT_LIST);
+            },
+          ),
+          ListTile(
+            title: Text(RouteTitles.BROWSE),
+            tileColor: _currentIndex == controller.pages.indexOf(Routes.BROWSE)
+                ? Colors.grey[300]
+                : null,
+            onTap: () {
+              print(controller.currentIndex.value);
+              Get.back();
+              controller.changePage(controller.pages.indexOf(Routes.BROWSE));
+              //Get.offNamed(Routes.BROWSE);
+            },
+          ),
+          ListTile(
+            title: Text(RouteTitles.HISTORY),
+            tileColor: _currentIndex == controller.pages.indexOf(Routes.HISTORY)
+                ? Colors.grey[300]
+                : null,
+            onTap: () {
+              print(controller.currentIndex.value);
+              Get.back();
+              controller.changePage(controller.pages.indexOf(Routes.HISTORY));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _shoppingCartBadge(counter) {
     return Badge(
       position: BadgePosition.topEnd(top: 0, end: 3),
@@ -85,6 +143,34 @@ class HomePage extends GetView<HomeController> {
         style: TextStyle(color: Colors.white),
       ),
       child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
+    );
+  }
+
+  createDrawerHeader() {
+    return Container(
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.teal,
+              child: Image.network(controller.userInfo.avatar),
+            ),
+          ),
+          Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                      '${controller.userInfo.firstName} ${controller.userInfo.lastName}'),
+                  Text(controller.userInfo.email),
+                ],
+              )),
+        ],
+      ),
     );
   }
 }

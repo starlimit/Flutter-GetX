@@ -33,15 +33,18 @@ class AuthController extends GetxController {
       login.password = '';
       login.token = res.token;
       //Write to Storage
-      userInfo.write('s_authInfo', login.toJson());
+      //userInfo.write('s_authInfo', login.toJson());
 
       //Fetch User Info
-      var user = await repository.fetchUser("1");
+      var user = await repository.fetchUser("2");
+      if (user != null) {
+        //Write to Storage
+        userInfo.write('s_authInfo', login.toJson());
+        print(user.toJson());
+        userInfo.write('s_userInfo', user.toJson());
 
-      //Write to Storage
-      userInfo.write('s_userInfo', user.toJson());
-
-      Get.offNamed(Routes.HOME);
+        Get.offNamed(Routes.HOME);
+      }
     }
     //}
     //)

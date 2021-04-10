@@ -3,6 +3,7 @@ import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
 import 'package:bottom_nav_test/app/data/models/login_model.dart';
+import 'package:bottom_nav_test/app/data/models/user_model.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
 import 'package:bottom_nav_test/app/modules/product_module/product_page.dart';
@@ -20,13 +21,13 @@ class HomeController extends GetxController {
 
   final _storage = GetStorage();
 
-  final _userInfo = LoginModel().obs;
+  final _userInfo = UserModel().obs;
   get userInfo => this._userInfo.value;
   set userInfo(value) => this._userInfo.value = value;
 
   HomeController() {
-    userInfo = LoginModel.fromJson(_storage.read('s_userInfo'));
-    print('==>${this.userInfo.token.toString()}');
+    userInfo = UserModel.fromJson(_storage.read('s_userInfo'));
+    //print('==>${this.userInfo.avatar.toString()}');
   }
   final pages = <String>[
     Routes.PRODUCT_LIST,
