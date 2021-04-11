@@ -152,20 +152,32 @@ class HomePage extends GetView<HomeController> {
         children: [
           Expanded(
             flex: 1,
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.teal,
-              child: Image.network(controller.userInfo.avatar),
+            child: Container(
+              width: 190.0,
+              height: 190.0,
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              decoration: new BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(width: 3.0, color: Colors.white),
+                image: new DecorationImage(
+                  fit: BoxFit.fill,
+                  image: new NetworkImage(controller.userInfo.avatar),
+                ),
+              ),
             ),
           ),
           Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                      '${controller.userInfo.firstName} ${controller.userInfo.lastName}'),
+                      '${controller.userInfo.firstName} ${controller.userInfo.lastName}',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
                   Text(controller.userInfo.email),
                 ],
               )),
