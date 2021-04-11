@@ -21,20 +21,34 @@ class ProductPage extends GetView<ProductController> {
                     itemCount: _.productList.length,
                     itemBuilder: (context, index) {
                       return Dismissible(
+                        confirmDismiss: (DismissDirection direction) async {
+                          return await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("Confirm"),
+                                content: const Text(
+                                    "Are you sure you wish to delete this item?"),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                      onPressed: () => navigator.pop(true),
+                                      child: const Text("DELETE")),
+                                  ElevatedButton(
+                                    onPressed: () => navigator.pop(false),
+                                    child: const Text("CANCEL"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                         onDismissed: (direction) {
-                          final item = _.productList[index];
                           // direction == DismissDirection.endToStart
                           //     ?
                           //_.removeProduct(index);
                           //    : _.editProduct(index, _.productList[index]);
-                          Get.defaultDialog(
-                              title: 'Confirm',
-                              onCancel: () => {},
-                              onConfirm: () {
-                                _.removeProduct(index);
-                                Get.back();
-                              },
-                              middleText: "Confirm Delete of Product?");
+                          _.removeProduct(index);
+                          Get.back();
                         },
                         direction: DismissDirection.endToStart,
                         background: Container(
