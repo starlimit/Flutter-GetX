@@ -28,7 +28,10 @@ class AuthController extends GetxController {
     var res = await repository.verifyUser(login);
 
     // Fetch User Details
-    if (res != null && res.token != '') await fetchUser(res);
+    if (res != null && res.token != '')
+      await fetchUser(res);
+    else
+      _loginStateStream.value = LoginState();
   }
 
   Future fetchUser(res) async {
@@ -41,9 +44,10 @@ class AuthController extends GetxController {
       //Write to Storage
       userInfo.write('s_authInfo', login.toJson());
       userInfo.write('s_userInfo', user.toJson());
-      _loginStateStream.value = LoginState();
       Get.offNamed(Routes.HOME);
     }
+
+    _loginStateStream.value = LoginState();
   }
 
   signOut() {
