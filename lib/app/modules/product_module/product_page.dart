@@ -18,6 +18,7 @@ class ProductPage extends GetView<ProductController> {
             ? Center(child: CircularProgressIndicator())
             : Obx(
                 () => ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: _.productList.length,
                     itemBuilder: (context, index) {
                       return Dismissible(

@@ -2,7 +2,6 @@ import 'package:bottom_nav_test/app/data/bindings/browse/browse_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/history/history_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/product/product_binding.dart';
 import 'package:bottom_nav_test/app/data/bindings/settings/settings_binding.dart';
-import 'package:bottom_nav_test/app/data/models/login_model.dart';
 import 'package:bottom_nav_test/app/data/models/user_model.dart';
 import 'package:bottom_nav_test/app/modules/browse_module/browse_page.dart';
 import 'package:bottom_nav_test/app/modules/history_module/history_page.dart';
